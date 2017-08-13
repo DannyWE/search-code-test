@@ -24,8 +24,6 @@ object FlattenResults {
       _ <- WriteResourceContent(usersExtensionPath, ReFeed.feedUsersExtension(ticketArray, userArray, organizationArray).asJson.spaces2)
     } yield ()
 
-    println(userExtensionsResult)
-
     val ticketsExtensionResult = for {
       ticketJsonStr <- GetResourceContent("/tickets.json")
       ticketArray <- TicketParser(ticketJsonStr)
@@ -35,7 +33,5 @@ object FlattenResults {
       organizationArray <- OrganizationParser(organizationJsonStr)
       _ <- WriteResourceContent(ticketsExtensionPath, ReFeed.feedTicketsExtension(ticketArray, userArray, organizationArray).asJson.spaces2)
     } yield ()
-
-    println(ticketsExtensionResult)
   }
 }
