@@ -28,6 +28,10 @@ $./sbt test
 ---
 
 ## :koala: the relationship of those JSON files
+<p align="center">
+    <img src="https://github.com/DannyWE/search-code-test/tree/master/lib/code-test-diagram.jpg" width="546">
+</p>
+
 Organization has one to many relationship with Users and Tickets
 User has one to many relationship with Tickets.
 
