@@ -1,4 +1,4 @@
-# search-code-test
+# Search Code Test
 The code test for search ticket, user and organisation 
 
 ## :dog: Setup
