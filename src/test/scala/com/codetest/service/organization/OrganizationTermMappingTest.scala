@@ -24,7 +24,7 @@ class OrganizationTermMappingTest extends BaseTestSuite {
     ("created_at",       "organization created_at",  List(defaultOrganization),                                    true ),
     ("created_at",       "some wrong value",         List(defaultOrganization),                                    false ),
 
-    ("details",          "user details",             List(defaultOrganization),                                    true ),
+    ("details",          "organization details",     List(defaultOrganization),                                    true ),
     ("details",          "some wrong value",         List(defaultOrganization),                                    false ),
 
     ("shared_tickets",   "false",                    List(defaultOrganization),                                    true ),

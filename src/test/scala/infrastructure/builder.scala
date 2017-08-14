@@ -31,7 +31,7 @@ object builder {
     external_id = "organization external id",
     name = "organization name",
     created_at = "organization created_at",
-    details = "user details",
+    details = "organization details",
     shared_tickets = false,
     domain_names = Nil,
     tags = Nil

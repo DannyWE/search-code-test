@@ -17,7 +17,7 @@ object SearchCommandHandler extends PartialFunction[Command, ErrorOr[String]] {
           jsonStr <- GetResourceContent(organizationJsonPath)
           organizations <- OrganizationParser(jsonStr)
           filterOrganizations <- OrganizationTermMapping.map(term, value, organizations)
-        } yield filterOrganizations).map(Display.forOrganization)
+        } yield filterOrganizations).map(Display.forModel(_, Display.forOrganization))
       case t => Left(ConsumeSearchCommandError(t))
     }
   }
