@@ -29,7 +29,7 @@ $./sbt test
 
 ## :koala: the relationship of those JSON files
 <p align="center">
-    <img src="https://github.com/DannyWE/search-code-test/blob/master/lib/code-test-diagram.jpg" width="546">
+    <img src="https://github.com/DannyWE/search-code-test/blob/master/assets/code-test-diagram.jpg" width="540">
 </p>
 
 Organization has one to many relationship with Users and Tickets
@@ -46,7 +46,7 @@ The reason is for fast searching. It is not practical to look up across 3 JSON f
  the more connections that are required, the more expensive the search. Also, the look up process
  should be recorded or cached. It can improve the search speed massively.
 
-[ElasticSearch Reference](https://www.elastic.co/guide/en/elasticsearch/guide/current/relations.html)
+[More details I learn from ElasticSearch Reference](https://www.elastic.co/guide/en/elasticsearch/guide/current/relations.html)
 
 ---
 
