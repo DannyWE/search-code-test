@@ -3,10 +3,12 @@ package com.codetest.service
 import com.codetest.error.ConsumeSearchCommandError
 import com.codetest.model._
 import com.codetest.service.organization.{OrganizationParser, OrganizationTermMapping}
+import com.codetest.service.ticket.{TicketExtensionParser, TicketTermMapping}
 import com.codetest.service.user.{UserExtensionParser, UserTermMapping}
 import com.codetest.util.{ErrorOr, GetResourceContent}
 
 object SearchCommandHandler extends PartialFunction[Command, ErrorOr[String]] {
+  private val ticketJsonPath = "/outputs/ticketsExtension.json"
   private val userJsonPath = "/outputs/usersExtension.json"
   private val organizationJsonPath = "/organizations.json"
 
@@ -14,6 +16,10 @@ object SearchCommandHandler extends PartialFunction[Command, ErrorOr[String]] {
 
   override def apply(command: Command) = {
     command match {
+      case SearchTickets(term, value) =>
+        search(term, value, GetResourceContent.apply,
+          ticketJsonPath, TicketExtensionParser.apply,
+          TicketTermMapping.map, Display.forModel[TicketExtension],  Display.forTicket)
       case SearchUsers(term, value) =>
         search(term, value, GetResourceContent.apply,
           userJsonPath, UserExtensionParser.apply,

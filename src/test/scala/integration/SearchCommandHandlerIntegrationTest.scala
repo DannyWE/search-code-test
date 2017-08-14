@@ -16,6 +16,16 @@ class SearchCommandHandlerIntegrationTest extends BaseTestSuite {
       )
   }
 
+  test("Search Tickets") {
+    val commands: List[String] = List("1 invalid-command", "1 priority=invalid", "1 priority=normal")
+
+    val result = commands.foldLeft("")((acc, ele) => acc + parseCommand(ele))
+
+    result contains "Invalid command : 1 invalid-command" should equal(true)
+    result contains "No Results Found" should equal(true)
+    result contains "45 Results Found" should equal(true)
+  }
+
   test("Search Organizations") {
     val result = parseCommand("3 details=MegaCorp")
 
