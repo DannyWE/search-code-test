@@ -14,7 +14,7 @@ object Display {
       case list =>
         s"""
            |${list.length} Results Found
-           |${list.map(toStr)}
+           |${list.map(toStr).mkString(" -------------- ")}
          """.stripMargin
     }
   }
