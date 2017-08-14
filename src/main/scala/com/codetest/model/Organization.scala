@@ -8,8 +8,8 @@ final case class Organization(
                           created_at: String,
                           details: String,
                           shared_tickets: Boolean,
-                          domain_names: Array[String],
-                          tags: Array[String]
+                          domain_names: List[String],
+                          tags: List[String]
                         ) {
 
 }

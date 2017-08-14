@@ -8,7 +8,7 @@ final case class Ticket(
                          subject: String,
                          priority: String,
                          status: String,
-                         tags: Array[String],
+                         tags: List[String],
                          has_incidents: Boolean,
                          via: String,
                          `type`: Option[String],

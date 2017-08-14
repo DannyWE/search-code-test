@@ -3,9 +3,9 @@ package com.codetest.service
 import com.codetest.model._
 
 object ReFeed {
-  def feedUsersExtension(tickets: Array[Ticket],
-                         users: Array[User],
-                         organizations: Array[Organization]): Array[UserExtension] =
+  def feedUsersExtension(tickets: List[Ticket],
+                         users: List[User],
+                         organizations: List[Organization]): List[UserExtension] =
     users.map(user =>
       UserExtension(
         user,
@@ -15,9 +15,9 @@ object ReFeed {
       )
     )
 
-  def feedTicketsExtension(tickets: Array[Ticket],
-                           users: Array[User],
-                           organizations: Array[Organization]): Array[TicketExtension] =
+  def feedTicketsExtension(tickets: List[Ticket],
+                           users: List[User],
+                           organizations: List[Organization]): List[TicketExtension] =
     tickets.map(ticket => TicketExtension(
       ticket = ticket,
       submitter = users.find(user => ticket.submitter_id.exists(_.equals(user._id))),

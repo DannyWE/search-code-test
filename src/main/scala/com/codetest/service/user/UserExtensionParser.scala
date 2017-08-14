@@ -6,5 +6,5 @@ import io.circe.generic.auto._
 import io.circe.parser.decode
 
 object UserExtensionParser {
-  def apply(jsonStr: String): Either[Error, Array[UserExtension]] = decode[Array[UserExtension]](jsonStr).left.map(_.toError)
+  def apply(jsonStr: String): Either[Error, List[UserExtension]] = decode[List[UserExtension]](jsonStr).left.map(_.toError)
 }

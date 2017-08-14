@@ -7,6 +7,6 @@ import io.circe.parser.decode
 
 object UserParser {
 
-  def apply(jsonStr: String): Either[Error, Array[User]] = decode[Array[User]](jsonStr).left.map(_.toError)
+  def apply(jsonStr: String): Either[Error, List[User]] = decode[List[User]](jsonStr).left.map(_.toError)
 
 }

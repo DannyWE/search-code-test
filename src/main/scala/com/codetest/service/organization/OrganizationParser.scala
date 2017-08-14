@@ -7,5 +7,5 @@ import io.circe.parser.decode
 
 object OrganizationParser {
 
-  def apply(jsonStr: String): Either[Error, Array[Organization]] = decode[Array[Organization]](jsonStr).left.map(_.toError)
+  def apply(jsonStr: String): Either[Error, List[Organization]] = decode[List[Organization]](jsonStr).left.map(_.toError)
 }

@@ -13,8 +13,8 @@ class SearchTermValueComparatorTest extends BaseTestSuite {
     (Some("test"),                    "no value",         false),
     (Some(100L),                      "100",              true),
     (Some(100L),                      "",                 false),
-    (Some(Array("1", "2", "3")),      "3",                true),
-    (Some(Array("1", "2", "3")),      "test",             false),
+    (Some(List("1", "2", "3")),       "3",                true),
+    (Some(List("1", "2", "3")),       "test",             false),
     (None,                            "",                 true),
     (None,                            "test",             false)
   )

@@ -7,5 +7,5 @@ import io.circe.parser.decode
 
 object TicketParser {
 
-  def apply(jsonStr: String): Either[Error, Array[Ticket]] = decode[Array[Ticket]](jsonStr).left.map(_.toError)
+  def apply(jsonStr: String): Either[Error, List[Ticket]] = decode[List[Ticket]](jsonStr).left.map(_.toError)
 }

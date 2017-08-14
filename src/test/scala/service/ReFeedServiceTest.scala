@@ -8,23 +8,23 @@ import infrastructure.builder._
 class ReFeedServiceTest extends BaseTestSuite {
 
   val specialUser: User = user.copy(organization_id = Some(100)).copy(_id = 300)
-  val linkedOrganization: Organization = organization.copy(_id = 100)
+  val linkedOrganization: Organization = defaultOrganization.copy(_id = 100)
   val submitTicket: Ticket = ticket.copy(submitter_id = Some(300))
   val assignedTicket: Ticket = ticket.copy(assignee_id = Some(300))
 
   val usersExtensionTable = Table(
     ("Tickets",                              "Users",                                                 "Organizations",                 "Expected: UserExtend"),
 
-    (Array[Ticket](),                       Array(user.copy(organization_id = Some(100))),            Array(linkedOrganization),      (Some(linkedOrganization), 0, 0)),
-    (Array(submitTicket),                   Array(user.copy(_id = 300)),                              Array[Organization](),          (None, 1, 0)),
-    (Array(assignedTicket),                 Array(user.copy(_id = 300)),                              Array[Organization](),          (None, 0, 1)),
-    (Array(submitTicket, assignedTicket),   Array(user.copy(_id = 300, organization_id = Some(100))), Array(linkedOrganization),      (Some(linkedOrganization), 1, 1))
+    (List[Ticket](),                       List(user.copy(organization_id = Some(100))),            List(linkedOrganization),      (Some(linkedOrganization), 0, 0)),
+    (List(submitTicket),                   List(user.copy(_id = 300)),                              List[Organization](),          (None, 1, 0)),
+    (List(assignedTicket),                 List(user.copy(_id = 300)),                              List[Organization](),          (None, 0, 1)),
+    (List(submitTicket, assignedTicket),   List(user.copy(_id = 300, organization_id = Some(100))), List(linkedOrganization),      (Some(linkedOrganization), 1, 1))
   )
 
   test("should re-feed to User Organization which combines User and Organization") {
-    forAll(usersExtensionTable)((tickets: Array[Ticket],
-                                 users: Array[User],
-                                 organizations: Array[Organization],
+    forAll(usersExtensionTable)((tickets: List[Ticket],
+                                 users: List[User],
+                                 organizations: List[Organization],
                                  expected: (Option[Organization], Int, Int)) => {
       val user = ReFeed.feedUsersExtension(tickets, users, organizations).head
       user.organization should equal(expected._1)
@@ -35,42 +35,42 @@ class ReFeedServiceTest extends BaseTestSuite {
 
   val submitter: User = user.copy(_id = 100)
   val assignee: User = user.copy(_id = 1000)
-  val ticketOrganization: Organization = organization.copy(_id = 100)
+  val ticketOrganization: Organization = defaultOrganization.copy(_id = 100)
   val ticketsExtensionTable = Table(
     ("Ticket",                                   "Users",                    "Organizations",             "Expected: UserExtend"),
 
-    (Array(ticket),                              Array(user),                Array(organization),         Array(TicketExtension(ticket, None, None, None))),
+    (List(ticket),                              List(user),                List(defaultOrganization),         List(TicketExtension(ticket, None, None, None))),
 
-    (Array(
+    (List(
       ticket.copy(
         submitter_id = Some(submitter._id))
-    ),                                           Array(submitter, assignee), Array(ticketOrganization),   Array(TicketExtension(ticket.copy(
+    ),                                           List(submitter, assignee), List(ticketOrganization),   List(TicketExtension(ticket.copy(
                                                                                                                       submitter_id = Some(submitter._id)
                                                                                                                     ), Some(submitter), None, None))),
 
-    (Array(
+    (List(
       ticket.copy(
         assignee_id = Some(assignee._id))
-    ),                                           Array(submitter, assignee), Array[Organization](),       Array(TicketExtension(ticket.copy(
+    ),                                           List(submitter, assignee), List[Organization](),       List(TicketExtension(ticket.copy(
                                                                                                                       assignee_id = Some(assignee._id)
                                                                                                                     ), None, Some(assignee), None))),
 
-    (Array(
+    (List(
       ticket.copy(
         submitter_id = Some(submitter._id),
         assignee_id = Some(assignee._id)
       )
-    ),                                           Array(submitter, assignee), Array[Organization](),       Array(TicketExtension(ticket.copy(
+    ),                                           List(submitter, assignee), List[Organization](),       List(TicketExtension(ticket.copy(
                                                                                                                         submitter_id = Some(submitter._id),
                                                                                                                         assignee_id = Some(assignee._id)
                                                                                                                       ), Some(submitter), Some(assignee), None))),
-      (Array(
+      (List(
         ticket.copy(
           submitter_id = Some(submitter._id),
           assignee_id = Some(assignee._id),
           organization_id = Some(ticketOrganization._id)
         )
-      ),                                         Array(submitter, assignee), Array(ticketOrganization),   Array(TicketExtension(ticket.copy(
+      ),                                         List(submitter, assignee), List(ticketOrganization),   List(TicketExtension(ticket.copy(
                                                                                                                     submitter_id = Some(submitter._id),
                                                                                                                     assignee_id = Some(assignee._id),
                                                                                                                     organization_id = Some(ticketOrganization._id)
@@ -78,11 +78,11 @@ class ReFeedServiceTest extends BaseTestSuite {
   )
 
   test("should re-feed to Ticket extension which combines Ticket, User and Organization") {
-    forAll(ticketsExtensionTable)((ticketArray: Array[Ticket],
-                                   userArray: Array[User],
-                                   organizationArray: Array[Organization],
-                                   expectedTickets: Array[TicketExtension]) => {
-      ReFeed.feedTicketsExtension(ticketArray, userArray, organizationArray) should equal(expectedTickets)
+    forAll(ticketsExtensionTable)((ticketList: List[Ticket],
+                                   userList: List[User],
+                                   organizationList: List[Organization],
+                                   expectedTickets: List[TicketExtension]) => {
+      ReFeed.feedTicketsExtension(ticketList, userList, organizationList) should equal(expectedTickets)
     })
   }
 }

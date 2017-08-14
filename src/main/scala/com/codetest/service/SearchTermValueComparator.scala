@@ -16,7 +16,7 @@ trait SearchTermValueComparator {
       case false if "false".equalsIgnoreCase(value) => true
       case t: String if t.equals(value) => true
       case t: Long if t.toString.equals(value) => true
-      case t: Array[String] if t.contains(value) || (t.isEmpty && value.isEmpty) => true
+      case t: List[String] if t.contains(value) || (t.isEmpty && value.isEmpty) => true
       case _ => false
     }
   }

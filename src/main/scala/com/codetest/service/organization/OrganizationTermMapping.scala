@@ -6,7 +6,7 @@ import com.codetest.service.SearchTermValueComparator
 import com.codetest.util.ErrorOr
 
 object OrganizationTermMapping extends SearchTermValueComparator {
-  def map(term: String, value: String, organizationArray: Array[Organization]): ErrorOr[Array[Organization]] = {
+  def map(term: String, value: String, organizationArray: List[Organization]): ErrorOr[List[Organization]] = {
     term match {
       case "_id" => Right(organizationArray.filter(t => compare(t._id, value)))
       case "url" => Right(organizationArray.filter(t => compare(t.url, value)))

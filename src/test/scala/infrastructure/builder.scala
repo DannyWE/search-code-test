@@ -12,7 +12,7 @@ object builder {
     last_login_at = "user last_login_at",
     phone = "phone",
     signature = "signature",
-    tags = Array(),
+    tags = Nil,
     role = "role",
     active = false,
     shared = false,
@@ -25,7 +25,7 @@ object builder {
     email = None
   )
 
-  val organization = Organization(
+  val defaultOrganization = Organization(
     _id = 1,
     url = "organization url",
     external_id = "organization external id",
@@ -33,8 +33,8 @@ object builder {
     created_at = "organization created_at",
     details = "user details",
     shared_tickets = false,
-    domain_names = Array(),
-    tags = Array()
+    domain_names = Nil,
+    tags = Nil
   )
 
   val ticket = Ticket(
@@ -46,7 +46,7 @@ object builder {
     priority = "ticket priority",
     status = "ticket status",
     submitter_id = None,
-    tags = Array(),
+    tags = Nil,
     has_incidents = false,
     via = "via",
     `type` = None,
