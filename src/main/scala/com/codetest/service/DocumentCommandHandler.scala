@@ -23,9 +23,9 @@ object DocumentCommandHandler extends PartialFunction[Command, ErrorOr[String]] 
              |${GetFields[Organization].mkString("\r\n")}
            """.stripMargin
         )
-      case Introduction =>
+      case Help =>
         Right(s"""
-           |Type 'quit' to exit at any time.
+           |Type 'quit' to exit at any time and 'help' to show this menu again.
            |   Or select search options:
            |   * Press 1 to search Tickets. For simplicity i.e. 1 priority=high
            |   * Press 2 to search Users. For simplicity i.e. 2 name=Sweet Cain

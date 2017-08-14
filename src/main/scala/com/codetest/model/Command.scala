@@ -3,7 +3,7 @@ package com.codetest.model
 sealed trait Command
 
 case object ListSearchableFields extends Command
-case object Introduction extends Command
+case object Help extends Command
 case object Quit extends Command
 
 trait SearchCommand extends Command {

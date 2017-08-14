@@ -1,12 +1,12 @@
 package com.codetest.app
 
-import com.codetest.model.{Command, Introduction, Quit}
+import com.codetest.model.{Command, Help, Quit}
 import com.codetest.service._
 import com.codetest.util.ErrorOr
 
 object Main extends App {
 
-  DocumentCommandHandler(Introduction).map(println)
+  DocumentCommandHandler(Help).map(println)
 
   while(true) {
     parseAndConsumeCommand(scala.io.StdIn.readLine())

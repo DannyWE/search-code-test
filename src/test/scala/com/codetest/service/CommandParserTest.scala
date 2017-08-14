@@ -10,8 +10,7 @@ class CommandParserTest extends BaseTestSuite {
     ("Command String",                  "Expected: Command"),
 
     ("quit",                            Right(Quit)),
-    ("introduction",                    Right(Introduction)),
-    ("intro",                           Right(Introduction)),
+    ("help",                            Right(Help)),
     ("view",                            Right(ListSearchableFields)),
     ("1 url=someUrl",                   Right(SearchTickets("url", "someUrl"))),
     ("2 name=name",                     Right(SearchUsers("name", "name"))),

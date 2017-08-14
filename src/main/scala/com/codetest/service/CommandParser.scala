@@ -14,7 +14,7 @@ object CommandParser {
 
     commandStr match {
       case "quit" => Right(Quit)
-      case "introduction" | "intro" => Right(Introduction)
+      case "help" => Right(Help)
       case "4" | "view" => Right(ListSearchableFields)
       case userRegex(term, value) => Right(SearchUsers(term, value))
       case ticketRegex(term, value) => Right(SearchTickets(term, value))

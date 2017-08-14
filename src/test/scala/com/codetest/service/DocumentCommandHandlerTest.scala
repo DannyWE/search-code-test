@@ -1,6 +1,6 @@
 package com.codetest.service
 
-import com.codetest.model.{Command, Introduction, ListSearchableFields, Quit}
+import com.codetest.model.{Command, Help, ListSearchableFields, Quit}
 import infrastructure.BaseTestSuite
 
 class DocumentCommandHandlerTest extends BaseTestSuite {
@@ -9,7 +9,7 @@ class DocumentCommandHandlerTest extends BaseTestSuite {
     ("Command",            "Expected: is right value"),
 
     (ListSearchableFields,   true),
-    (Introduction,           true),
+    (Help,                   true),
     (Quit,                   false)
   )
 
