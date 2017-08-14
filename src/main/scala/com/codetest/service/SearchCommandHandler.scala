@@ -19,15 +19,15 @@ object SearchCommandHandler extends PartialFunction[Command, ErrorOr[String]] {
       case SearchTickets(term, value) =>
         search(term, value, GetResourceContent.apply,
           ticketJsonPath, TicketExtensionParser.apply,
-          TicketTermMapping.map, Display.forModel[TicketExtension],  Display.forTicket)
+          TicketTermMapping.apply, Display.forModel[TicketExtension],  Display.forTicket)
       case SearchUsers(term, value) =>
         search(term, value, GetResourceContent.apply,
           userJsonPath, UserExtensionParser.apply,
-          UserTermMapping.map, Display.forModel[UserExtension],  Display.forUser)
+          UserTermMapping.apply, Display.forModel[UserExtension],  Display.forUser)
       case SearchOrganizations(term, value) =>
         search(term, value, GetResourceContent.apply,
           organizationJsonPath, OrganizationParser.apply,
-          OrganizationTermMapping.map, Display.forModel[Organization],  Display.forOrganization)
+          OrganizationTermMapping.apply, Display.forModel[Organization],  Display.forOrganization)
       case t => Left(ConsumeSearchCommandError(t))
     }
   }

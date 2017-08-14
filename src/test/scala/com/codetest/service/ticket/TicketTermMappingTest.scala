@@ -61,7 +61,7 @@ class TicketTermMappingTest extends BaseTestSuite {
 
   test("should map the data") {
     forAll(table)((term: String, value: String, tickets: List[TicketExtension], expectedFound: Boolean) => {
-      val result = TicketTermMapping.map(term, value, tickets) match {
+      val result = TicketTermMapping(term, value, tickets) match {
         case Right(t) if t.nonEmpty => true
         case _ => false
       }

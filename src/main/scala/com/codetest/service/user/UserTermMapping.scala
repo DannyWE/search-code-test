@@ -6,7 +6,7 @@ import com.codetest.service.SearchTermValueComparator
 import com.codetest.util.ErrorOr
 
 object UserTermMapping extends SearchTermValueComparator {
-  def map(term: String, value: String, users: List[UserExtension]): ErrorOr[List[UserExtension]] = {
+  def apply(term: String, value: String, users: List[UserExtension]): ErrorOr[List[UserExtension]] = {
     term match {
       case "_id" => Right(users.filter(t => compare(t.user._id, value)))
       case "url" => Right(users.filter(t => compare(t.user.url, value)))

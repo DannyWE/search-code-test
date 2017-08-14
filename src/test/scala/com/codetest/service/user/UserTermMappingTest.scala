@@ -70,7 +70,7 @@ class UserTermMappingTest extends BaseTestSuite {
 
   test("should map the data") {
     forAll(table)((term: String, value: String, users: List[UserExtension], expectedFound: Boolean) => {
-      val result = UserTermMapping.map(term, value, users) match {
+      val result = UserTermMapping(term, value, users) match {
         case Right(t) if t.nonEmpty => true
         case _ => false
       }

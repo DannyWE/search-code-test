@@ -7,7 +7,7 @@ import com.codetest.util.ErrorOr
 
 object TicketTermMapping extends SearchTermValueComparator {
 
-  def map(term: String, value: String, ticketList: List[TicketExtension]): ErrorOr[List[TicketExtension]] = {
+  def apply(term: String, value: String, ticketList: List[TicketExtension]): ErrorOr[List[TicketExtension]] = {
     term match {
       case "_id" => Right(ticketList.filter(t => compare(t.ticket._id, value)))
       case "url" => Right(ticketList.filter(t => compare(t.ticket.url, value)))

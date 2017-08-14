@@ -39,7 +39,7 @@ class OrganizationTermMappingTest extends BaseTestSuite {
 
   test("should map the data") {
     forAll(table)((term: String, value: String, organizations: List[Organization], expectedFound: Boolean) => {
-      val result = OrganizationTermMapping.map(term, value, organizations) match {
+      val result = OrganizationTermMapping(term, value, organizations) match {
         case Right(t) if t.nonEmpty => true
         case _ => false
       }
