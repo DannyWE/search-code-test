@@ -12,17 +12,9 @@ object Display {
            |${forOneOrganization(head)}
          """.stripMargin
       case list =>
-        val moreDetails = organizations.map(t => {
-          s"""
-             |_id: ${t._id}
-             |name: ${t.name}
-             |details: ${t.details}
-        """.stripMargin
-        }).mkString("")
-
         s"""
            |${list.length} Results Found
-           |$moreDetails
+           |${organizations.map(forOneOrganization)}
          """.stripMargin
     }
   }
