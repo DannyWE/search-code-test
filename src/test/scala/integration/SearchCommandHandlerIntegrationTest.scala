@@ -24,4 +24,11 @@ class SearchCommandHandlerIntegrationTest extends BaseTestSuite {
     result contains "details: MegaCorp" should equal(true)
   }
 
+  test("Search Users") {
+    val result = parseCommand("2 name=Sweet Cain")
+
+    result contains "1 Result Found" should equal(true)
+    result contains "active: true" should equal(true)
+    result contains "organization name: Zentry" should equal(true)
+  }
 }
