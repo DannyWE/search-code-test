@@ -21,7 +21,7 @@ class UserParserTest extends BaseTestSuite {
     firstUser.last_login_at should equal("2013-08-04T01:03:27 -10:00")
     firstUser.phone should equal("8335-422-718")
     firstUser.signature should equal("Don't Worry Be Happy!")
-    firstUser.tags should equal(Array(
+    firstUser.tags should equal(List(
       "Springville",
       "Sutton",
       "Hartsville/Hartley",

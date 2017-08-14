@@ -26,7 +26,7 @@ class TicketExtensionParserTest extends BaseTestSuite {
     firstTicket.assignee_id should equal(Some(24))
     firstTicket.organization_id should equal(Some(116))
     firstTicket.tags should equal(
-      Array(
+      List(
         "Ohio",
         "Pennsylvania",
         "American Samoa",

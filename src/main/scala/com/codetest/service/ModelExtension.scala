@@ -2,10 +2,10 @@ package com.codetest.service
 
 import com.codetest.model._
 
-object ReFeed {
-  def feedUsersExtension(tickets: List[Ticket],
-                         users: List[User],
-                         organizations: List[Organization]): List[UserExtension] =
+object ModelExtension {
+  def usersExtension(tickets: List[Ticket],
+                     users: List[User],
+                     organizations: List[Organization]): List[UserExtension] =
     users.map(user =>
       UserExtension(
         user,
@@ -15,9 +15,9 @@ object ReFeed {
       )
     )
 
-  def feedTicketsExtension(tickets: List[Ticket],
-                           users: List[User],
-                           organizations: List[Organization]): List[TicketExtension] =
+  def ticketsExtension(tickets: List[Ticket],
+                       users: List[User],
+                       organizations: List[Organization]): List[TicketExtension] =
     tickets.map(ticket => TicketExtension(
       ticket = ticket,
       submitter = users.find(user => ticket.submitter_id.exists(_.equals(user._id))),

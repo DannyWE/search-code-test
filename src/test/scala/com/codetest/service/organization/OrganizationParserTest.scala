@@ -20,13 +20,13 @@ class OrganizationParserTest extends BaseTestSuite {
     firstOrganization.created_at should equal("2016-05-21T11:10:28 -10:00")
     firstOrganization.details should equal("MegaCorp")
     firstOrganization.shared_tickets should equal(false)
-    firstOrganization.domain_names should equal(Array(
+    firstOrganization.domain_names should equal(List(
       "kage.com",
       "ecratic.com",
       "endipin.com",
       "zentix.com"
     ))
-    firstOrganization.tags should equal(Array(
+    firstOrganization.tags should equal(List(
       "Fulton",
       "West",
       "Rodriguez",

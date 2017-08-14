@@ -15,7 +15,7 @@ class UserExtensionParserTest extends BaseTestSuite {
     users.head.user.email should equal(Some("coffeyrasmussen@flotonic.com"))
     users.head.assignTicket.length should equal(2)
     users.head.submitTicket.length should equal(2)
-    users.head.organization.get.tags should equal(Array("Erickson",
+    users.head.organization.get.tags should equal(List("Erickson",
       "Mccoy",
       "Wiggins",
       "Brooks"

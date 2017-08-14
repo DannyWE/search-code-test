@@ -1,11 +1,11 @@
 package service
 
 import com.codetest.model._
-import com.codetest.service.ReFeed
+import com.codetest.service.ModelExtension
 import infrastructure.BaseTestSuite
 import infrastructure.builder._
 
-class ReFeedServiceTest extends BaseTestSuite {
+class ModelExtensionServiceTest extends BaseTestSuite {
 
   val specialUser: User = defaultUser.copy(organization_id = Some(100)).copy(_id = 300)
   val linkedOrganization: Organization = defaultOrganization.copy(_id = 100)
@@ -26,7 +26,7 @@ class ReFeedServiceTest extends BaseTestSuite {
                                  users: List[User],
                                  organizations: List[Organization],
                                  expected: (Option[Organization], Int, Int)) => {
-      val user = ReFeed.feedUsersExtension(tickets, users, organizations).head
+      val user = ModelExtension.usersExtension(tickets, users, organizations).head
       user.organization should equal(expected._1)
       user.submitTicket.length should equal(expected._2)
       user.assignTicket.length should equal(expected._3)
@@ -82,7 +82,7 @@ class ReFeedServiceTest extends BaseTestSuite {
                                    userList: List[User],
                                    organizationList: List[Organization],
                                    expectedTickets: List[TicketExtension]) => {
-      ReFeed.feedTicketsExtension(ticketList, userList, organizationList) should equal(expectedTickets)
+      ModelExtension.ticketsExtension(ticketList, userList, organizationList) should equal(expectedTickets)
     })
   }
 }
