@@ -7,18 +7,18 @@ import infrastructure.builder._
 
 class ReFeedServiceTest extends BaseTestSuite {
 
-  val specialUser: User = user.copy(organization_id = Some(100)).copy(_id = 300)
+  val specialUser: User = defaultUser.copy(organization_id = Some(100)).copy(_id = 300)
   val linkedOrganization: Organization = defaultOrganization.copy(_id = 100)
-  val submitTicket: Ticket = ticket.copy(submitter_id = Some(300))
-  val assignedTicket: Ticket = ticket.copy(assignee_id = Some(300))
+  val submitTicket: Ticket = defaultTicket.copy(submitter_id = Some(300))
+  val assignedTicket: Ticket = defaultTicket.copy(assignee_id = Some(300))
 
   val usersExtensionTable = Table(
     ("Tickets",                              "Users",                                                 "Organizations",                 "Expected: UserExtend"),
 
-    (List[Ticket](),                       List(user.copy(organization_id = Some(100))),            List(linkedOrganization),      (Some(linkedOrganization), 0, 0)),
-    (List(submitTicket),                   List(user.copy(_id = 300)),                              List[Organization](),          (None, 1, 0)),
-    (List(assignedTicket),                 List(user.copy(_id = 300)),                              List[Organization](),          (None, 0, 1)),
-    (List(submitTicket, assignedTicket),   List(user.copy(_id = 300, organization_id = Some(100))), List(linkedOrganization),      (Some(linkedOrganization), 1, 1))
+    (List[Ticket](),                       List(defaultUser.copy(organization_id = Some(100))),            List(linkedOrganization),      (Some(linkedOrganization), 0, 0)),
+    (List(submitTicket),                   List(defaultUser.copy(_id = 300)),                              List[Organization](),          (None, 1, 0)),
+    (List(assignedTicket),                 List(defaultUser.copy(_id = 300)),                              List[Organization](),          (None, 0, 1)),
+    (List(submitTicket, assignedTicket),   List(defaultUser.copy(_id = 300, organization_id = Some(100))), List(linkedOrganization),      (Some(linkedOrganization), 1, 1))
   )
 
   test("should re-feed to User Organization which combines User and Organization") {
@@ -33,44 +33,44 @@ class ReFeedServiceTest extends BaseTestSuite {
     })
   }
 
-  val submitter: User = user.copy(_id = 100)
-  val assignee: User = user.copy(_id = 1000)
+  val submitter: User = defaultUser.copy(_id = 100)
+  val assignee: User = defaultUser.copy(_id = 1000)
   val ticketOrganization: Organization = defaultOrganization.copy(_id = 100)
   val ticketsExtensionTable = Table(
     ("Ticket",                                   "Users",                    "Organizations",             "Expected: UserExtend"),
 
-    (List(ticket),                              List(user),                List(defaultOrganization),         List(TicketExtension(ticket, None, None, None))),
+    (List(defaultTicket),                        List(defaultUser),           List(defaultOrganization),    List(TicketExtension(defaultTicket, None, None, None))),
 
     (List(
-      ticket.copy(
+      defaultTicket.copy(
         submitter_id = Some(submitter._id))
-    ),                                           List(submitter, assignee), List(ticketOrganization),   List(TicketExtension(ticket.copy(
+    ),                                           List(submitter, assignee),   List(ticketOrganization),     List(TicketExtension(defaultTicket.copy(
                                                                                                                       submitter_id = Some(submitter._id)
                                                                                                                     ), Some(submitter), None, None))),
 
     (List(
-      ticket.copy(
+      defaultTicket.copy(
         assignee_id = Some(assignee._id))
-    ),                                           List(submitter, assignee), List[Organization](),       List(TicketExtension(ticket.copy(
+    ),                                           List(submitter, assignee),   List[Organization](),         List(TicketExtension(defaultTicket.copy(
                                                                                                                       assignee_id = Some(assignee._id)
                                                                                                                     ), None, Some(assignee), None))),
 
     (List(
-      ticket.copy(
+      defaultTicket.copy(
         submitter_id = Some(submitter._id),
         assignee_id = Some(assignee._id)
       )
-    ),                                           List(submitter, assignee), List[Organization](),       List(TicketExtension(ticket.copy(
+    ),                                           List(submitter, assignee),   List[Organization](),         List(TicketExtension(defaultTicket.copy(
                                                                                                                         submitter_id = Some(submitter._id),
                                                                                                                         assignee_id = Some(assignee._id)
                                                                                                                       ), Some(submitter), Some(assignee), None))),
       (List(
-        ticket.copy(
+        defaultTicket.copy(
           submitter_id = Some(submitter._id),
           assignee_id = Some(assignee._id),
           organization_id = Some(ticketOrganization._id)
         )
-      ),                                         List(submitter, assignee), List(ticketOrganization),   List(TicketExtension(ticket.copy(
+      ),                                         List(submitter, assignee), List(ticketOrganization),        List(TicketExtension(defaultTicket.copy(
                                                                                                                     submitter_id = Some(submitter._id),
                                                                                                                     assignee_id = Some(assignee._id),
                                                                                                                     organization_id = Some(ticketOrganization._id)

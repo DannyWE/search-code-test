@@ -3,7 +3,7 @@ package infrastructure
 import com.codetest.model.{Organization, Ticket, User}
 
 object builder {
-  val user = User(
+  val defaultUser = User(
     _id = 0,
     url = "user url",
     external_id = "user external_id",
@@ -37,7 +37,7 @@ object builder {
     tags = Nil
   )
 
-  val ticket = Ticket(
+  val defaultTicket = Ticket(
     _id = "ticket id",
     url = "ticket url",
     external_id = "ticket external_id",
