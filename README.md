@@ -20,6 +20,12 @@ $./sbt clean compile
 $./sbt run
 ```
 
+Only for the first run, sbt is quite slow to download all dependencies into ivy.
+Also, if you do not want install sbt locally, you can run the app via docker. The image is already pushed into docker hub.
+```bash
+$./auto/run.sh
+```
+
 ## :bear: Testing
 ```bash
 $./sbt test
