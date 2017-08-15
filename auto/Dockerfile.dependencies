@@ -1,0 +1,13 @@
+FROM java:latest
+# Add a nonroot user
+RUN useradd -m build
+
+# Install Java and sbt dependencies
+WORKDIR /home/build/app
+ADD . ./
+RUN chown -R build:build .
+USER build
+RUN ./sbt test
+# Remove the app code
+# We want an image with only the dependencies in it
+RUN cd .. && rm -rf app

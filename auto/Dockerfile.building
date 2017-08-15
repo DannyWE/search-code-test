@@ -1,0 +1,8 @@
+FROM dockertry/search-code-test-dependencies
+USER root
+ADD . ./
+RUN chown -R build:build .
+USER build
+# Run project
+ENTRYPOINT ["./sbt","run"]
+
